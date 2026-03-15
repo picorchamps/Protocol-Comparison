@@ -1,0 +1,10 @@
+# Root docker-compose — runs all three scenarios sequentially.
+# Use the per-scenario files for individual runs:
+#   docker compose -f docker-compose.tcp.yml up --build
+#   docker compose -f docker-compose.redis.yml up --build
+#   TEST=latency docker compose -f docker-compose.quic.yml up --build
+
+# This file is provided as a convenience entry point.
+# For proper test isolation, run each scenario file separately.
+include:
+  - docker-compose.tcp.yml

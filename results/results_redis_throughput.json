@@ -1,0 +1,20 @@
+{
+  "scenario": "redis",
+  "test": "throughput",
+  "timestamp_utc": "2026-03-15T09:19:55.385090383+00:00",
+  "total_bytes": 1073741824,
+  "duration_ms": 4543.221482,
+  "throughput_mbps": 225.39072859578454,
+  "throughput_gbps": 0.22010813339432084,
+  "deserialise_ms": 2823.1560419999983,
+  "latency_samples_us": null,
+  "p50_us": null,
+  "p95_us": null,
+  "p99_us": null,
+  "p999_us": null,
+  "min_us": null,
+  "max_us": null,
+  "mean_us": null,
+  "stddev_us": null,
+  "messages_per_sec": null
+}

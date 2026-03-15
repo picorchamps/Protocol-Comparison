@@ -1,0 +1,20 @@
+services:
+  receiver:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: tcp receiver --test ${TEST:-throughput} --output /results/results_tcp_${TEST:-throughput}.json
+    environment:
+      RUST_LOG: info
+    volumes:
+      - ./results:/results
+
+  sender:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: tcp sender --test ${TEST:-throughput} --host receiver
+    depends_on:
+      - receiver
+    environment:
+      RUST_LOG: info

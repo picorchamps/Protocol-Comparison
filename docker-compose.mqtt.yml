@@ -1,0 +1,33 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  receiver:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: mqtt receiver --test ${TEST:-throughput} --output /results/results_mqtt_${TEST:-throughput}.json
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    environment:
+      RUST_LOG: info
+    volumes:
+      - ./results:/results
+
+  sender:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: mqtt sender --test ${TEST:-throughput} --host mosquitto
+    depends_on:
+      - receiver
+    environment:
+      RUST_LOG: info

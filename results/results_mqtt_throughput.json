@@ -1,0 +1,20 @@
+{
+  "scenario": "mqtt",
+  "test": "throughput",
+  "timestamp_utc": "2026-03-15T09:59:11.623755645+00:00",
+  "total_bytes": 1073741824,
+  "duration_ms": 5342.684464000001,
+  "throughput_mbps": 191.66394850751567,
+  "throughput_gbps": 0.18717182471437077,
+  "deserialise_ms": 1833.0204909999998,
+  "latency_samples_us": null,
+  "p50_us": null,
+  "p95_us": null,
+  "p99_us": null,
+  "p999_us": null,
+  "min_us": null,
+  "max_us": null,
+  "mean_us": null,
+  "stddev_us": null,
+  "messages_per_sec": null
+}

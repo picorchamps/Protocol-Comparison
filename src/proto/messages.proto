@@ -1,0 +1,22 @@
+syntax = "proto3";
+package pico;
+
+// Shared test payload used in latency tests across all scenarios.
+// For Redis/QUIC this struct is also serialised differently (JSON/bincode),
+// but the *logical* fields are identical.
+message TestPayload {
+    uint64 id            = 1;
+    uint64 timestamp_us  = 2;
+    uint32 sequence      = 3;
+    string label         = 4;
+    repeated double values = 5;
+    map<string, string> tags = 6;
+}
+
+// Used to stream large payloads in chunks (Redis throughput, TCP throughput).
+message ThroughputChunk {
+    uint64 transfer_id   = 1;
+    uint32 chunk_index   = 2;
+    uint32 total_chunks  = 3;
+    bytes  data          = 4;
+}

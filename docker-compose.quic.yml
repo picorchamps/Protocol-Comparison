@@ -1,0 +1,26 @@
+services:
+  receiver:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: quic receiver --test ${TEST:-throughput} --output /results/results_quic_${TEST:-throughput}.json --certs-dir /certs
+    environment:
+      RUST_LOG: info
+    volumes:
+      - ./certs:/certs
+      - ./results:/results
+    # Expose the QUIC port (UDP)
+    ports:
+      - "4433:4433/udp"
+
+  sender:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: quic sender --test ${TEST:-throughput} --host receiver --certs-dir /certs
+    depends_on:
+      - receiver
+    environment:
+      RUST_LOG: info
+    volumes:
+      - ./certs:/certs
